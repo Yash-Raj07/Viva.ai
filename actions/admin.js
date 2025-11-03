@@ -6,6 +6,12 @@ import { revalidatePath } from "next/cache";
 
 // Admin utility functions for doctor verification and payouts (minor comment update)
 
+
+
+// Added a simple version tag for internal tracking
+const ADMIN_MODULE_VERSION = "1.0.1"; 
+
+
 export async function verifyAdmin() {
   const { userId } = await auth();
 
