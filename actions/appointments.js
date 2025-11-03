@@ -1,5 +1,7 @@
 "use server";
 
+// Appointment module - minor cleanup & debug addition (v1.0.2)
+
 import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
