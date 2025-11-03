@@ -4,9 +4,8 @@ import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
-/**
- * Verifies if current user has admin role
- */
+// Admin utility functions for doctor verification and payouts (minor comment update)
+
 export async function verifyAdmin() {
   const { userId } = await auth();
 
