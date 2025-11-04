@@ -4,6 +4,11 @@ import { db } from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
+
+
+// Doctor scheduling module last reviewed: Nov 2025 (minor maintenance update)
+const DOCTOR_MODULE_VERSION = "1.0.1";
+
 /**
  * Set doctor's availability slots
  */
