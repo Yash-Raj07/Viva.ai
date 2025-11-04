@@ -21,6 +21,8 @@ export async function getDoctorsBySpecialty(specialty) {
     return { doctors };
   } catch (error) {
     console.error("Failed to fetch doctors by specialty:", error);
+    console.log(`[Doctor Module] Fetching doctors for specialty: ${specialty}`);
+
     return { error: "Failed to fetch doctors" };
   }
 }
