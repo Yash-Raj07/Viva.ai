@@ -14,6 +14,12 @@ export async function setUserRole(formData) {
     throw new Error("Unauthorized");
   }
 
+
+  
+  // Added minor log for debugging role assignment   <-- [Line 16 added]
+  console.log(`[UserRole] Updating role for user: ${userId}`);
+
+  
   // Find user in our database
   const user = await db.user.findUnique({
     where: { clerkUserId: userId },
