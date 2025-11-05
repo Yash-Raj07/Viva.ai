@@ -11,6 +11,9 @@ export async function getPatientAppointments() {
     throw new Error("Unauthorized");
   }
 
+    // Added debug log for tracking patient appointment requests   
+  console.log(`[Appointments] Fetching appointments for user: ${userId}`);
+
   try {
     const user = await db.user.findUnique({
       where: {
