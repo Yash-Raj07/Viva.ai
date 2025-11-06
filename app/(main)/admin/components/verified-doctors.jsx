@@ -16,6 +16,12 @@ import { updateDoctorActiveStatus } from "@/actions/admin";
 import useFetch from "@/hooks/use-fetch";
 import { toast } from "sonner";
 
+
+
+
+
+
+
 export function VerifiedDoctors({ doctors }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [targetDoctor, setTargetDoctor] = useState(null);
@@ -62,6 +68,18 @@ export function VerifiedDoctors({ doctors }) {
       setActionType(null);
     }
   }, [data]);
+
+
+  if (data?.success && targetDoctor) {
+  setDoctors((prev) =>
+    prev.map((doc) =>
+      doc.id === targetDoctor.id
+        ? { ...doc, verificationStatus: actionType === "SUSPEND" ? "REJECTED" : "APPROVED" }
+        : doc
+    )
+  );
+}
+
 
   return (
     <div>
