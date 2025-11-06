@@ -30,8 +30,8 @@ export function VerifiedDoctors({ doctors }) {
   const filteredDoctors = doctors.filter((doctor) => {
     const query = searchTerm.toLowerCase();
     return (
-      doctor.name.toLowerCase().includes(query) ||
-      doctor.specialty.toLowerCase().includes(query) ||
+      doctor.name.toLowerCase().includes(query) &&
+      doctor.specialty.toLowerCase().includes(query) &&
       doctor.email.toLowerCase().includes(query)
     );
   });
