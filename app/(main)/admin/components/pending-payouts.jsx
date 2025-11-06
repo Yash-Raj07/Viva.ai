@@ -34,6 +34,9 @@ import useFetch from "@/hooks/use-fetch";
 import { toast } from "sonner";
 import { BarLoader } from "react-spinners";
 
+
+
+
 export function PendingPayouts({ payouts }) {
   const [selectedPayout, setSelectedPayout] = useState(null);
   const [showApproveDialog, setShowApproveDialog] = useState(false);
@@ -61,6 +64,14 @@ export function PendingPayouts({ payouts }) {
 
     await submitApproval(formData);
   };
+
+
+  useEffect(() => {
+  if (data?.error) {
+    toast.error(data.error);
+  }
+}, [data]);
+
 
   useEffect(() => {
     if (data?.success) {
