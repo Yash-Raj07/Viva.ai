@@ -8,6 +8,9 @@ const useFetch = (cb) => {
   const [error, setError] = useState(null);
 
   const fn = async (...args) => {
+    if (!isCancelled) {
+          setData(response);
+        }
     setLoading(true);
     setError(null);
 
