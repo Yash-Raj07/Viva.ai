@@ -393,6 +393,8 @@ export async function getAvailableTimeSlots(doctorId) {
       }
     }
 
+    
+
     // Convert to array of slots grouped by day for easier consumption by the UI
     const result = Object.entries(availableSlotsByDay).map(([date, slots]) => ({
       date,
@@ -408,4 +410,42 @@ export async function getAvailableTimeSlots(doctorId) {
     console.error("Failed to fetch available slots:", error);
     throw new Error("Failed to fetch available time slots: " + error.message);
   }
+
+  // -----------------------------
+// TRANSACTIONAL SLOT BOOKING
+// -----------------------------
+
+const bookedSlot = await db.$transaction(async (tx) => {
+  // Lock the first available slot for this doctor
+  const slot = await tx.appointmentSlot.findFirst({
+    where: {
+      doctorId: doctor.id,
+      isBooked: false,
+      slotTime: {
+        gte: startTime,
+        lte: endTime,
+      },
+    },
+    orderBy: {
+      slotTime: "asc",
+    },
+  });
+
+  if (!slot) {
+    throw new Error("No available slots for this doctor");
+  }
+
+  // Mark slot as booked
+  await tx.appointmentSlot.update({
+    where: {
+      id: slot.id,
+    },
+    data: {
+      isBooked: true,
+    },
+  });
+
+  return slot;
+});
+
 }
